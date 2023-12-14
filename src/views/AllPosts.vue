@@ -2,8 +2,10 @@
   <div class="AllPosts">
     <div id="post-list">
     <h1>All Posts</h1>
-     <div class="container">
-    <button   @click="Logout" class="center">Logout</button>
+    <div class="container">
+      <button @click="Logout" class="center">Logout</button>
+      <!--<button v-if = "authResult" @click="Logout" class="center">Logout</button>-->
+
     </div>
       <ul>
         <div class="item" v-for="post in posts" :key="post.id">
@@ -32,6 +34,21 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.posts = data))
         .catch((err) => console.log(err.message));
+    },
+    Logout() {
+      fetch("http://localhost:3000/auth/logout", {
+          credentials: 'include', //  Don't forget to specify this if you need cookies
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('jwt removed');
+        this.$router.push("/login");
+        location.assign("/api/login");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("error logout");
+      });
     },
   },
   mounted() {

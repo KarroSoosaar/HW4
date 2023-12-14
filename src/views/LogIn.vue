@@ -7,6 +7,7 @@
     <input type="password" name="password" required v-model="password">
     <div class="container">
       <button @click="LogIn"  class="center">LogIn</button>
+      <label for="or" class="or">or</label>
       <button @click='this.$router.push("/api/signup")' class="center">Signup</button>
     </div>
   </div>
@@ -100,5 +101,10 @@ button {
 .container {
   display: flex;
   justify-content: center;
+}
+
+.or{
+  position: relative;
+  top:5px;
 }
 </style>
