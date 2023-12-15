@@ -135,6 +135,26 @@ app.get('/auth/logout', (req, res) => {
     .json({ "Msg": "cookie cleared" })
 });
 
+app.get('/auth/authenticate', async(req, res) => {
+    const token = req.cookies.jwt;
+    let authenticated = false;
+    try {
+        if (token) { //checks if the token exists
+        //jwt.verify(token, secretOrPublicKey, [options, callback])
+        await jwt.verify(token, secret, (err) => { //token exists
+            if (err) { // not verified, redirect to login page
+                console.log(err.message);
+                res.send({ "authenticated": authenticated }); // false
+            } else { // token exists and it is verified
+                authenticated = true;
+                res.send({ "authenticated": authenticated }); // true
+            }})}
+            else {res.send({ "authenticated": authenticated });} // false
+            }
+            catch (err) {
+                res.status(400).send(err.message);}
+    });
+
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
 });

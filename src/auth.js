@@ -12,3 +12,4 @@ export default {
     return this.user.authenticated;}
     }
 //Pole kindel kas see õiges kohas, aga slaidi järgi peaks siuke funktsioon olema / kaustas.
+//Ei toimi vist praegu
