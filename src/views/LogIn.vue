@@ -18,36 +18,36 @@ export default {
 name: "LogIn", 
 data: function() {
     return {
-   email: '',
-   password: '',
-  }
+      email: '',
+      password: '',
+    }
   },
   methods: {
 LogIn() {
-      var data = {
-        email: this.email,
-        password: this.password
-      };
-      fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-          credentials: 'include', 
-          body: JSON.stringify(data),
-      })
-      .then((response) => response.json())
-      .then((data) => {
+    var data = {
+      email: this.email,
+      password: this.password
+    };
+    fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+        credentials: 'include', 
+        body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then((data) => {
       console.log(data);
       location.assign("/");
-      })
-      .catch((e) => {
-        console.log(e);
-        console.log("error");
-      });
-    },
-  }, 
-  }
+    })
+    .catch((e) => {
+      console.log(e);
+      console.log("error");
+    });
+  },
+}, 
+}
 </script>
 
 <style scoped>
@@ -61,10 +61,8 @@ LogIn() {
 }
 h3 {
   text-align: center;
-  color: rgb(8, 110, 110);
 }
 label {
-  color: rgb(8, 110, 110);
   display: inline-block;
   margin: 25px 0 15px;
   font-size: 0.8em;
@@ -79,10 +77,9 @@ input {
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid white;
-  color: blue;
 }
 button {
-  background: rgb(8, 110, 110);
+  background: rgb(97, 85, 85);
   border: 0;
   padding: 10px 20px;
   margin: 20px 20px 20px 20px;

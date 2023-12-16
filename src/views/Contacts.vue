@@ -27,10 +27,8 @@
   }
   h3 {
     text-align: center;
-    color: rgb(8, 110, 110);
   }
   label {
-    color: rgb(8, 110, 110);
     display: inline-block;
     margin: 25px 0 15px;
     font-size: 0.8em;

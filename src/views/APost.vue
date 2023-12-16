@@ -79,10 +79,8 @@ export default {
 }
 h3 {
   text-align: center;
-  color: rgb(8, 110, 110);
 }
 label {
-  color: rgb(8, 110, 110);
   display: inline-block;
   margin: 25px 0 15px;
   font-size: 0.8em;
@@ -97,15 +95,12 @@ input {
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid white;
-  color: blue;
 }
 button {
-  background: rgb(8, 110, 110);
-  border: 0;
+  background: rgb(97, 85, 85);
+  margin: 20px 20px 20px 20px;
   padding: 10px 20px;
-  margin-top: 20px;
   color: white;
-  border-radius: 20px;
 }
 .container {
   display: flex;

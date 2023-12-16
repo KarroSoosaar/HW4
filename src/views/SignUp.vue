@@ -15,10 +15,10 @@ export default {
 name: "SignUp", 
 data: function() {
     return {
-   email: '',
-   password: '',
-   errMsg: '',
-  }
+      email: '',
+      password: '',
+      errMsg: '',
+    }
   },
 watch: {
     password(value) {
@@ -72,10 +72,10 @@ SignUp() {
 }
 h3 {
   text-align: center;
-  color: rgb(8, 110, 110);
+  color: #2c3e50;
 }
 label {
-  color: rgb(8, 110, 110);
+  color: #2c3e50;
   display: inline-block;
   margin: 25px 0 15px;
   font-size: 0.8em;
@@ -93,7 +93,7 @@ input {
   color: blue;
 }
 button {
-  background: rgb(8, 110, 110);
+  background: rgb(97, 85, 85);
   border: 0;
   padding: 10px 20px;
   margin-top: 20px;

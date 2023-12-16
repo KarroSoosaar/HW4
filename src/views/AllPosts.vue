@@ -8,15 +8,15 @@
       <ul>
         <div class="item" v-for="post in posts" :key="post.id">
             <a class= 'singlepost' :href="'/api/apost/' + post.id">
-            <span class="date"> <b>Date:</b> {{ post.date }}  </span><br />
+            <span class="date"> {{ post.date }}  </span><br />
             <span class="body"> <b>Body:</b> {{ post.body }} </span> <br />
           </a>
         </div>
       </ul>
-      <div class="container">
-        <button v-if = "authResult" @click="AddPost" class="center">Add post</button>
-        <button v-if = "authResult" @click="DeleteAll" class="center">Delete all</button>
     </div>
+    <div class="container">
+      <button v-if = "authResult" @click="AddPost" class="center">Add post</button>
+      <button v-if = "authResult" @click="DeleteAll" class="center">Delete all</button>
     </div>
   </div>
 </template>
@@ -52,7 +52,6 @@ export default {
         console.log(data);
         console.log('jwt removed');
         this.$router.push("/api/login");
-        //location.assign("/api/login");
       })
       .catch((e) => {
         console.log(e);
@@ -90,36 +89,41 @@ h1 {
 }
 a {
   text-decoration: none;
+  color:#2c3e50;
+  width: auto;
 }
 a:hover {
   text-decoration: underline;
 }
 .item {
-  background: rgb(189, 212, 199);
+  position: relative;
+  display: block;
+  background-color: #ddd;
   margin-bottom: 5px;
   padding: 3px 5px;
   border-radius: 10px;
+  position: relative;
+  margin: 20px auto;
+  width: 65%;
+  height: auto;
+  box-sizing: border-box;
 }
 #post-list {
-  background: #6e8b97;
+  background: rgb(167, 154, 154);
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
   padding: 10px 20px;
   margin: auto;
-  width: 50%;
+  width: 60%;
   border-radius: 20px;
 }
 #post-list ul {
   padding: 0;
 }
-#post-list li {
-  display: inline-block;
-  margin-right: 10px;
-  margin-top: 10px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.7);
-}
-.button {
-  padding: 20px;
+
+button {
+  background: rgb(97, 85, 85);
+  margin: 20px 20px 20px 20px;
+  color: white;
 }
 </style>
