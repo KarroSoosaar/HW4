@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 import AllPosts from "../views/AllPosts.vue";
 import APost from "../views/APost.vue";
 import AddPost from "../views/AddPost.vue";
@@ -9,6 +9,21 @@ import auth from "../auth"
 
 const routes = [
     {
+        path: "/",
+        name: "home",
+        component: AllPosts,
+
+        beforeEnter: async(to, from, next) => {
+            let authResult = await auth.authenticated();
+            console.log(authResult);
+            if (!authResult) {
+                next('/api/login')
+            } else {
+                next();
+            }
+        }
+    },
+    {
         path: "/api/signup",
         name: "SignUp",
         component: SignUp,
@@ -18,20 +33,7 @@ const routes = [
         name: "LogIn",
         component: LogIn,
     },
-    {
-    path: "/",
-    name: "AllPosts",
-    component: () =>
-            import ("../views/AllPosts.vue"),
-    beforeEnter: async(to, from, next) => {
-        let authResult = await auth.authenticated();
-        if (!authResult) {
-            next('/login')
-        } else {
-            next();
-        }
-        }
-    },
+
     {
         path: "/api/allposts",
         name: "AllPosts",
@@ -46,25 +48,29 @@ const routes = [
         path: "/api/addpost",
         name: "AddPost",
         component: AddPost,
+
+        beforeEnter: async(to, from, next) => {
+            let authResult = await auth.authenticated();
+            console.log(authResult);
+            if (!authResult) {
+                next('/api/login')
+            } else {
+                next();
+            }
+        }
     },
     {
         path: "/api/contacts",
         name: "Contacts",
         component: Contacts,
     },
-    { //will route to LogIn view if none of the previous routes apply
-    //Siin tahaks tegelt LogIn-i routida, et alati kui mingi vale request siis logi sisse et jätkata vms, aga see ei toiminud hästi
-        path: "/:catchAll(.*)",
-        name: "AllPosts",
-        component: AllPosts,
-    }
-]
+];
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory(),
     routes
-})
+});
 
 
 
-export default router
+export default router;

@@ -3,7 +3,7 @@
     <div id="post-list">
     <h1>All Posts</h1>
     <div class="container">
-      <button @click="Logout" class="center">Logout</button>
+      <button v-if = "authResult" @click="Logout()" class="center">Logout</button>
       <!--<button v-if = "authResult" @click="Logout" class="center">Logout</button>-->
 
     </div>
@@ -21,12 +21,18 @@
 
 
 <script>
+import auth from "../auth";
+
 export default {
   name: "AllPosts",
-  data() {
+  components: {
+
+  },
+  data: function() {
     return {
       posts: [],
-    };
+      authResult: auth.authenticated()
+    }
   },
   methods: {
     fetchPosts() {
@@ -41,9 +47,10 @@ export default {
       })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         console.log('jwt removed');
-        this.$router.push("/login");
-        location.assign("/api/login");
+        this.$router.push("/api/login");
+        //location.assign("/api/login");
       })
       .catch((e) => {
         console.log(e);
