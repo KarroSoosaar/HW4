@@ -1,9 +1,9 @@
 <template>
   <div>
     <nav>
-      <router-link to="/api/Contacts">Contacts</router-link> |
-      <router-link to="/">Posts</router-link> | 
-      <router-link to="/api/addpost">Add a Post</router-link>  
+      <router-link to="/api/Contacts">Contact Us</router-link> |
+      <router-link to="/">Posts</router-link>
+      <!--<router-link to="/api/addpost">Add a Post</router-link>-->  
       <!-- <router-link to="/api/signup">SignUp</router-link> |  -->
       <!-- <router-link to="/api/login">Login</router-link>  -->
     </nav>
@@ -15,11 +15,11 @@
 <script>
 export default {
   name: "App",
-   methods: {
-    Logout() {
-      fetch("http://localhost:3000/auth/logout", {
+    methods: {
+      Logout() {
+        fetch("http://localhost:3000/auth/logout", {
           credentials: 'include', //  Don't forget to specify this if you need cookies
-      })
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

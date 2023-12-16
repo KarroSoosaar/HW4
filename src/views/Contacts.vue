@@ -1,8 +1,10 @@
 <template>
     <div class="Contacts">
       <div id="tBox">
-        <h3>Contacts</h3>
-        <p>Sorry, you have no friends</p>
+        <h3>Contact Us</h3>
+        <p>Tanel Pastarus</p>
+        <p>Karro Soosaar</p>
+        <p>Official helpline: 54541010</p>
       </div>
     </div>
   </template>

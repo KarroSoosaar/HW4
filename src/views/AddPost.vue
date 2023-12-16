@@ -21,7 +21,7 @@ export default {
   methods: {
     addPost() {
       var data = {
-        date: new Date().toLocaleString(),
+        date: new Date().toLocaleDateString(),
         body: this.post.body,
       };
       fetch("http://localhost:3000/api/posts", {

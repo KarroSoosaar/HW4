@@ -111,6 +111,17 @@ app.delete('/api/posts/:id', async(req, res) => {
     }
 });
 
+app.delete('/api/posts', async(req, res) => {
+    try {
+        console.log("delete all posts request has arrived");
+        const deleteposts = await pool.query(
+            "TRUNCATE TABLE posttable"
+        );
+        res.json(deleteposts);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 
 app.post('/auth/signup', async(req, res) => {
     try {

@@ -4,8 +4,6 @@
     <h1>All Posts</h1>
     <div class="container">
       <button v-if = "authResult" @click="Logout()" class="center">Logout</button>
-      <!--<button v-if = "authResult" @click="Logout" class="center">Logout</button>-->
-
     </div>
       <ul>
         <div class="item" v-for="post in posts" :key="post.id">
@@ -15,6 +13,10 @@
           </a>
         </div>
       </ul>
+      <div class="container">
+        <button v-if = "authResult" @click="AddPost" class="center">Add post</button>
+        <button v-if = "authResult" @click="DeleteAll" class="center">Delete all</button>
+    </div>
     </div>
   </div>
 </template>
@@ -56,6 +58,23 @@ export default {
         console.log(e);
         console.log("error logout");
       });
+    },
+    AddPost() {
+      this.$router.push("/api/AddPost");
+    },
+    DeleteAll() {
+      fetch(`http://localhost:3000/api/posts`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push("/api/allposts");
+        })
+        .then((data) => (this.posts = data))
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
   mounted() {
@@ -99,5 +118,8 @@ a:hover {
   margin-top: 10px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.7);
+}
+.button {
+  padding: 20px;
 }
 </style>
