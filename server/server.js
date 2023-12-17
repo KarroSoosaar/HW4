@@ -25,6 +25,17 @@ app.listen(port, () => {
     console.log("Server is listening to port " + port)
 });
 
+app.post('/auth/users', async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+      res.json({ exists: result.rows.length > 0 });
+    } catch (error) {
+      console.error('Error checking user existence:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 app.get('/auth/authenticate', async(req, res) => {
     const token = req.cookies.jwt;

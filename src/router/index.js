@@ -15,7 +15,6 @@ const routes = [
 
         beforeEnter: async(to, from, next) => {
             let authResult = await auth.authenticated();
-            console.log(authResult);
             if (!authResult) {
                 next('/api/login')
             } else {

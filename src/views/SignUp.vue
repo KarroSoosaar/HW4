@@ -5,6 +5,7 @@
     <input type="email" name="email"  required v-model="email">
     <label for="password">Password</label>
     <input type="password" name="password" required v-model="password">
+    <div v-if="errMsgEmail">{{errMsgEmail}} </div>
     <div v-if="errMsg">{{errMsg}} </div>
     <button @click="SignUp" class="SignUp">SignUp</button>
   </div>
@@ -18,15 +19,11 @@ data: function() {
       email: '',
       password: '',
       errMsg: '',
+      errMsgEmail: ''
     }
   },
-watch: {
-    password(value) {
-      this.password = value;
-      this.validatePassword(value);
-    }
-  },
-  methods: {
+
+methods: {
 validatePassword(value) {
       if (value.length < 8 || value.length >= 16 || !/[A-Z]/.test(value) || !/[0-9]/.test(value)) {
         this.errMsg = "Password must be at least 8 characters  and less than 16 characters, it must include a capital letter and at least one number"
@@ -34,7 +31,54 @@ validatePassword(value) {
       this.errMsg = ''
       }
     },
-SignUp() {
+
+    validateEmail(value) {
+      // Use a regular expression or another method to validate email
+      // For simplicity, a basic email validation is used here
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(value)) {
+        this.errMsgEmail = 'Please enter a valid email'
+      }
+      else {
+        this.errMsgEmail = ''
+      }
+    },
+
+    async checkIfUserExists(email) {
+      try {
+        const response = await fetch('http://localhost:3000/auth/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+        return data.exists;
+      } catch (error) {
+        console.error('Error checking user existence:', error);
+        return false; // Handle the error appropriately in your application
+      }
+    },
+
+async SignUp() {
+  this.validatePassword(this.password);
+  this.validateEmail(this.email);
+
+ if (!this.errMsgEmail) {
+  const v = await this.checkIfUserExists(this.email);
+  if (v) {
+    this.errMsgEmail = "Email already exists";
+  }
+  else {
+    this.errMsgEmail = "";
+  }
+ }
+
+  if (!this.errMsg && !this.errMsgEmail) {
+    // Do not proceed if there are validation errors
       var data = {
         email: this.email,
         password: this.password
@@ -56,6 +100,7 @@ SignUp() {
         console.log(e);
         console.log("error");
       });
+    }
     },
   }, 
   }
