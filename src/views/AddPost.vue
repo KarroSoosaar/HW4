@@ -24,7 +24,7 @@ export default {
         date: new Date().toLocaleDateString(),
         body: this.post.body,
       };
-      fetch("http://localhost:3000/api/posts", {
+      fetch("http://localhost:3000/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export default {
       })
       .then((response) => {
         console.log(response.data);
-        this.$router.push("/api/allposts");
+        this.$router.push("/allposts");
       })
       .catch((e) => {
         console.log(e);

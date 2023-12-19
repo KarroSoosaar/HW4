@@ -7,9 +7,9 @@
     </div>
       <ul>
         <div class="item" v-for="post in posts" :key="post.id">
-            <a class= 'singlepost' :href="'/api/apost/' + post.id">
-            <span class="date"> {{ post.date }}  </span><br />
-            <span class="body"> <b>Body:</b> {{ post.body }} </span> <br />
+            <a class= 'singlepost' :href="'/apost/' + post.id">
+            <div class="date"> {{ post.date }}  </div><br />
+            <span class="body"> {{ post.body }} </span> <br />
           </a>
         </div>
       </ul>
@@ -19,6 +19,7 @@
       <button v-if = "authResult" @click="DeleteAll" class="center">Delete all</button>
     </div>
   </div>
+
 </template>
 
 
@@ -38,7 +39,7 @@ export default {
   },
   methods: {
     fetchPosts() {
-      fetch(`http://localhost:3000/api/posts/`)
+      fetch(`http://localhost:3000/posts/`)
         .then((response) => response.json())
         .then((data) => (this.posts = data))
         .catch((err) => console.log(err.message));
@@ -51,7 +52,7 @@ export default {
       .then((data) => {
         console.log(data);
         console.log('jwt removed');
-        this.$router.push("/api/login");
+        this.$router.push("/login");
       })
       .catch((e) => {
         console.log(e);
@@ -59,16 +60,16 @@ export default {
       });
     },
     AddPost() {
-      this.$router.push("/api/AddPost");
+      this.$router.push("/AddPost");
     },
     DeleteAll() {
-      fetch(`http://localhost:3000/api/posts`, {
+      fetch(`http://localhost:3000/posts`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/api/allposts");
+          this.$router.push("/allposts");
         })
         .then((data) => (this.posts = data))
         .catch((e) => {
@@ -84,8 +85,15 @@ export default {
 </script>
 
 <style scoped>
+.body {
+  font-weight: bold;
+}
 h1 {
   font-size: 20px;
+}
+
+.date {
+  text-align: right;
 }
 a {
   text-decoration: none;
@@ -96,11 +104,12 @@ a:hover {
   text-decoration: underline;
 }
 .item {
+  text-align: left;
   position: relative;
   display: block;
   background-color: #ddd;
   margin-bottom: 5px;
-  padding: 3px 5px;
+  padding: 30px;
   border-radius: 10px;
   position: relative;
   margin: 20px auto;

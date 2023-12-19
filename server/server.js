@@ -57,7 +57,7 @@ app.get('/auth/authenticate', async(req, res) => {
                 res.status(400).send(err.message);}
     });
 
-app.post('/api/posts', async(req, res) => {
+app.post('/posts', async(req, res) => {
     try {
         console.log("a post request has arrived");
         const post = req.body;
@@ -70,7 +70,7 @@ app.post('/api/posts', async(req, res) => {
     }
 });
 
-app.get('/api/posts', async(req, res) => {
+app.get('/posts', async(req, res) => {
     try {
         console.log("get posts request has arrived");
         const posts = await pool.query(
@@ -82,7 +82,7 @@ app.get('/api/posts', async(req, res) => {
     }
 });
 
-app.get('/api/posts/:id', async(req, res) => {
+app.get('/posts/:id', async(req, res) => {
     try {
         console.log("get a post with route parameter  request has arrived");
         const { id } = req.params;
@@ -95,7 +95,7 @@ app.get('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.put('/api/posts/:id', async(req, res) => {
+app.put('/posts/:id', async(req, res) => {
     try {
         const { id } = req.params;
         const post = req.body;
@@ -109,7 +109,7 @@ app.put('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.delete('/api/posts/:id', async(req, res) => {
+app.delete('/posts/:id', async(req, res) => {
     try {
         const { id } = req.params;
         console.log("delete a post request has arrived");
@@ -122,7 +122,7 @@ app.delete('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.delete('/api/posts', async(req, res) => {
+app.delete('/posts', async(req, res) => {
     try {
         console.log("delete all posts request has arrived");
         const deleteposts = await pool.query(

@@ -27,13 +27,13 @@ export default {
   },
   methods: {
     fetchAPost(id) {
-      fetch(`http://localhost:3000/api/posts/${id}`)
+      fetch(`http://localhost:3000/posts/${id}`)
         .then((response) => response.json())
         .then((data) => (this.post = data))
         .catch((err) => console.log(err.message));
     },
     updatePost() {
-      fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
+      fetch(`http://localhost:3000/posts/${this.post.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -42,20 +42,20 @@ export default {
       })
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/api/allposts");
+          this.$router.push("/allposts");
         })
         .catch((e) => {
           console.log(e);
         });
     },
     deletePost() {
-      fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
+      fetch(`http://localhost:3000/posts/${this.post.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/api/allposts");
+          this.$router.push("/allposts");
         })
         .catch((e) => {
           console.log(e);
